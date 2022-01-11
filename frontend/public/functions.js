@@ -1,6 +1,10 @@
 const $ = (selector) => document.querySelector(selector)
 
+let token = ""
+
 function init() {
+	token = "..."
+
 	refreshList()
 	refreshDetail()
 	clearForm()
@@ -13,7 +17,7 @@ function handleError(response) {
 function _fetch(uri, options) {
 	options = options ?? {}
 	options.headers = options.headers ?? {}
-	options.headers["Authorization"] = "Basic " + btoa("joe:asdf")
+	options.headers["Authorization"] = "Bearer " + token
 
 	return fetch(uri, options).then(response => {
 		return response.ok ? response.json() : handleError(response)
