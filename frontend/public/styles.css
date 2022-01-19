@@ -84,6 +84,14 @@ button {
 	height: 30px;
 	box-sizing: border-box;
 	padding: 0;
+	display: none
+}
+
+button.login,
+.scope-write button.save,
+.scope-write button.clear,
+.scope-delete button.delete {
+	display: inline-block
 }
 
 button.clear::before {

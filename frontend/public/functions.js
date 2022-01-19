@@ -27,7 +27,7 @@ function login() {
 function logout() {
 	token = ""
 	localStorage.removeItem("token")
-	document.body.classList.remove("loggedin")
+	document.body.classList.remove("loggedin", "scope-read", "scope-write", "scope-delete")
 }
 
 function loadUser() {
@@ -37,6 +37,7 @@ function loadUser() {
 function showUser(user) {
 	$("#user .name").textContent = user.name
 	$("#user .picture").textContent = user.picture
+	document.body.classList.add(...user.scopes.map(scope => 'scope-' + scope))
 }
 
 function handleError(response) {
