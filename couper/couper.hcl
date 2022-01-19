@@ -1,6 +1,7 @@
 server {
   api {
     base_path = "/api"
+    access_control = ["user_credentials"]
     endpoint "/**" {
       proxy {
         backend {
@@ -8,5 +9,12 @@ server {
         }
       }
     }
+  }
+}
+
+definitions {
+  basic_auth "user_credentials" {
+    user = "joe"
+    password = "asdf"
   }
 }
