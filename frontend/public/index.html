@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>🌍 Countries</title>
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+	<link rel="stylesheet" href="styles.css">
+	<script src="functions.js"></script>
+</head>
+<body>
+	<header>
+	</header>
+	<ul id="list"></ul>
+	<div id="info"></div>
+
+	<div id="editor">
+		<form id="form">
+			<input type="text" name="name" placeholder="Name">
+			<textarea name="data"></textarea>
+		</form>
+		<button class="save"></button>
+		<button class="delete"></button>
+		<button class="clear"></button>
+	</div>
+</body>
+
+<script>
+$("button.save").addEventListener('click', event => {
+	const form = $("#form")
+	const id = form.name.value
+	storeCountry(id, form.data.value).then(json => {
+		showCountry(id, json)
+		history.pushState({}, null, "#" + id)
+		refreshList()
+	})
+})
+
+$("button.delete").addEventListener('click', event => {
+	if (window.confirm("Sure?")) {
+		deleteCountry($("#form").name.value).then(res => {
+			refreshList()
+			clearForm()
+			$("#info").innerHTML = ""
+			history.pushState({}, null, "#")
+		})
+	}
+})
+
+$("button.clear").addEventListener('click', clearForm)
+
+window.onhashchange = (e) => {
+	refreshDetail()
+}
+
+window.addEventListener('DOMContentLoaded', init)
+</script>
+</html>
