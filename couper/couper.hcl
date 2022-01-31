@@ -13,6 +13,17 @@ server {
       }
     }
   }
+
+  api {
+    endpoint "/userinfo" {
+      request {
+        url = "https://demo-idp.couper.io/userinfo"
+        headers = {
+          Authorization = request.headers.authorization
+        }
+      }
+    }
+  }
 }
 
 definitions {

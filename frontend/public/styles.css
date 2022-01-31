@@ -17,12 +17,27 @@ header {
 	margin-bottom: 5px;
 }
 
-.loggedin #list, .loggedin #info, .loggedin #editor, .loggedin button.logout {
+.loggedin #list, .loggedin #info, .loggedin #editor, .loggedin button.logout, .loggedin #user {
 	display: inline-block
 }
 
 .loggedin button.login, button.logout {
 	display: none
+}
+
+#user {
+	display: none;
+	height: 30px;
+	vertical-align: top;
+}
+
+#user * {
+	vertical-align: middle;
+	line-height: 30px;
+}
+
+#user .picture {
+	font-size: 30px;
 }
 
 #list, #info, #editor {

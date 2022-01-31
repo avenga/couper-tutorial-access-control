@@ -35,6 +35,7 @@ function log(req, res) {
 }
 
 app.use('/api', proxyMiddleware)
+app.use('/userinfo', proxyMiddleware)
 
 app.disable('x-powered-by')
 app.listen(PORT, () => console.info(`frontend serving on http://localhost:${PORT}/...`))

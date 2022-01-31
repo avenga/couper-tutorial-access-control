@@ -11,6 +11,7 @@ function init() {
 	refreshDetail()
 	clearForm()
 	document.body.classList.add("loggedin")
+	loadUser().then(showUser)
 }
 
 function login() {
@@ -27,6 +28,15 @@ function logout() {
 	token = ""
 	localStorage.removeItem("token")
 	document.body.classList.remove("loggedin")
+}
+
+function loadUser() {
+	return _fetch("/userinfo")
+}
+
+function showUser(user) {
+	$("#user .name").textContent = user.name
+	$("#user .picture").textContent = user.picture
 }
 
 function handleError(response) {
