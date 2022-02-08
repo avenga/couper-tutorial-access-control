@@ -66,12 +66,18 @@ definitions {
       admin = ["read", "write", "delete"]
       user  = ["read"]
     }
+    required_claims = ["role", "sub", "exp"]
+    claims = {
+      aud = env.GATEWAY
+      iss = "${env.IDP}/"
+    }
   }
 }
 
 defaults {
   environment_variables = {
     BACKEND = "http://localhost:3001"
+    GATEWAY = "http://localhost:8080"
     IDP     = "https://demo-idp.couper.io"
   }
 }
