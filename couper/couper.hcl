@@ -1,4 +1,8 @@
 server {
+  files {
+    document_root = "../frontend/public/"
+  }
+
   api {
     base_path = "/api"
     access_control = ["user_token"]
@@ -20,6 +24,20 @@ server {
   }
 
   api {
+    endpoint "/login" {
+      response {
+        body =<<-END
+          <html><script>
+            localStorage.setItem("token", ${json_encode(default(request.form_body.token[0], ""))})
+            location.href = "/" + location.hash
+          </script></html>
+        END
+        headers = {
+          Content-Type = "text/html"
+        }
+      }
+    }
+
     endpoint "/userinfo" {
       access_control = ["user_token"]
       request {
