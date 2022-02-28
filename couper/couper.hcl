@@ -14,7 +14,6 @@ server {
 
 definitions {
   basic_auth "user_credentials" {
-    user = "joe"
-    password = "asdf"
+    htpasswd_file = "htpasswd"
   }
 }
