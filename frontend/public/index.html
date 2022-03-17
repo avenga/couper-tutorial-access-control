@@ -9,6 +9,8 @@
 </head>
 <body>
 	<header>
+		<button class="logout"></button>
+		<button class="login"></button>
 	</header>
 	<ul id="list"></ul>
 	<div id="info"></div>
@@ -47,6 +49,8 @@ $("button.delete").addEventListener('click', event => {
 })
 
 $("button.clear").addEventListener('click', clearForm)
+$("button.login").addEventListener('click', login)
+$("button.logout").addEventListener('click', logout)
 
 window.onhashchange = (e) => {
 	refreshDetail()

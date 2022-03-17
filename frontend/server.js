@@ -5,6 +5,15 @@ const PORT = 3000
 const BACKEND_URL = "http://localhost:8080/"
 
 const app = express()
+app.use(require('body-parser').urlencoded({extended:false}))
+
+app.post('/login', (req, res) => {
+	const html = `<html><script>
+	  localStorage.setItem("token", ${JSON.stringify(req.body.token ?? "")})
+	  location.href = "/" + location.hash
+	</script></html>`
+	res.send(html)
+})
 
 app.use(express.static(__dirname + '/public', {
 	setHeaders: (res, path) => {

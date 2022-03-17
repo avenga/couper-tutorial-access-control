@@ -17,8 +17,16 @@ header {
 	margin-bottom: 5px;
 }
 
+.loggedin #list, .loggedin #info, .loggedin #editor, .loggedin button.logout {
+	display: inline-block
+}
+
+.loggedin button.login, button.logout {
+	display: none
+}
+
 #list, #info, #editor {
-	display: inline-block;
+	display: none;
 	border: 1px solid black;
 	vertical-align: top;
 	background: linear-gradient(white, lightgray);
@@ -73,4 +81,12 @@ button.save::before {
 
 button.delete::before {
 	content: "🗑 Delete"
+}
+
+button.login::before {
+	content: "👤 Login"
+}
+
+button.logout::before {
+	content: "🚪 Logout"
 }

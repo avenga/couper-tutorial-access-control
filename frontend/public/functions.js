@@ -3,14 +3,37 @@ const $ = (selector) => document.querySelector(selector)
 let token = ""
 
 function init() {
-	token = "..."
+	if (!(token = localStorage.getItem("token"))) {
+		return
+	}
 
 	refreshList()
 	refreshDetail()
 	clearForm()
+	document.body.classList.add("loggedin")
+}
+
+function login() {
+	const currentURL = new URL(location)
+	currentURL.pathname = "/login"
+
+	const loginURL = new URL("/login", "https://demo-idp.couper.io")
+	loginURL.searchParams.set("callback", currentURL.href)
+	loginURL.searchParams.set("spid", "local")
+	location.href = loginURL
+}
+
+function logout() {
+	token = ""
+	localStorage.removeItem("token")
+	document.body.classList.remove("loggedin")
 }
 
 function handleError(response) {
+	if (response.status === 403) {
+		logout()
+	}
+
 	return Promise.reject(response.status)
 }
 
