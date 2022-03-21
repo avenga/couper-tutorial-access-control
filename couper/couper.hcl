@@ -10,7 +10,7 @@ server {
       }
       proxy {
         backend {
-          origin = "http://localhost:3001"
+          origin = env.BACKEND
           add_request_headers = {
             User = request.context.user_token.sub
           }
@@ -23,7 +23,7 @@ server {
     endpoint "/userinfo" {
       access_control = ["user_token"]
       request {
-        url = "https://demo-idp.couper.io/userinfo"
+        url = "${env.IDP}/userinfo"
         headers = {
           Authorization = request.headers.authorization
         }
@@ -42,11 +42,18 @@ server {
 
 definitions {
   jwt "user_token" {
-    jwks_url = "https://demo-idp.couper.io/jwks.json"
+    jwks_url = "${env.IDP}/jwks.json"
     beta_roles_claim = "role"
     beta_roles_map = {
       admin = ["read", "write", "delete"]
       user  = ["read"]
     }
+  }
+}
+
+defaults {
+  environment_variables = {
+    BACKEND = "http://localhost:3001"
+    IDP     = "https://demo-idp.couper.io"
   }
 }
