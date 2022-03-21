@@ -6,6 +6,9 @@ server {
       proxy {
         backend {
           origin = "http://localhost:3001"
+          add_request_headers = {
+            User = request.context.user_token.sub
+          }
         }
       }
     }
