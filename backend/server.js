@@ -72,6 +72,7 @@ function log(req, res) {
 	const responseHeaders = res.getHeaders()
 
 	const user = requestHeaders["user"] ?? "-"
+	const requestID = requestHeaders["couper-request-id"] ?? "-"
 	const type = (responseHeaders["content-type"] ?? "-").split(';')[0]
-	console.info(new Date(), ":" + PORT, req.method, req.url, res.statusCode, type, user)
+	console.info(new Date(), ":" + PORT, req.method, req.url, res.statusCode, type, user, requestID)
 }
